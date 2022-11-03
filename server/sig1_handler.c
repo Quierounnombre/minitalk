@@ -1,25 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.c                                           :+:      :+:    :+:   */
+/*   sig1_handler.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vicgarci <vicgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/02 15:51:30 by vicgarci          #+#    #+#             */
-/*   Updated: 2022/11/03 19:19:47 by vicgarci         ###   ########.fr       */
+/*   Created: 2022/11/03 19:16:57 by vicgarci          #+#    #+#             */
+/*   Updated: 2022/11/03 19:19:04 by vicgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft_def/libftprintf.h"
-
-int	main(void)
+void	sig1_handler(int i, int *i2)
 {
-	int	i;
-
-	i = 0;
-	ft_printf("Mi ID es: %d\n", getpid());
-	sigaction(kill)
-	while (1)
-	{
-	}
+	ft_printf("Numero de señales: %d\n", i);
+	*i2++;
 }
