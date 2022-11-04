@@ -6,12 +6,17 @@
 /*   By: vicgarci <vicgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 19:16:57 by vicgarci          #+#    #+#             */
-/*   Updated: 2022/11/03 19:19:04 by vicgarci         ###   ########.fr       */
+/*   Updated: 2022/11/04 15:03:33 by vicgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	sig1_handler(int i, int *i2)
+#include "server.h"
+
+void	sig_handler(int j)
 {
+	static int	i;
+
+	j = 0;
 	ft_printf("Numero de señales: %d\n", i);
-	*i2++;
+	i++;
 }

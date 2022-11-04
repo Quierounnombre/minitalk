@@ -1,31 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.c                                           :+:      :+:    :+:   */
+/*   server.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vicgarci <vicgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/02 15:51:30 by vicgarci          #+#    #+#             */
-/*   Updated: 2022/11/04 15:03:57 by vicgarci         ###   ########.fr       */
+/*   Created: 2022/11/04 13:07:30 by vicgarci          #+#    #+#             */
+/*   Updated: 2022/11/04 15:03:42 by vicgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "server.h"
+#ifndef SERVER_H
+# define SERVER_H
 
-int	main(void)
-{
-	struct sigaction	sact;
-	int					i;
+# include "../libft_def/libftprintf.h"
 
-	i = 0;
-	ft_printf("Mi ID es: %d\n", getpid());
-	if (set_sigh(&sact, sig_handler, SIGUSR1))
-	{
-		if (set_sigh(&sact, sig_handler, SIGUSR2))
-		{
-			while (1)
-			{
-			}
-		}
-	}
-}
+int		set_sigh(struct sigaction *sact, void (*f)(int), int signal);
+void	sig_handler(int j);
+
+#endif
