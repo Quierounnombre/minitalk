@@ -6,7 +6,7 @@
 /*   By: vicgarci <vicgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 13:05:26 by vicgarci          #+#    #+#             */
-/*   Updated: 2022/11/07 20:10:36 by vicgarci         ###   ########.fr       */
+/*   Updated: 2022/11/07 20:25:30 by vicgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ int	set_sigh(struct sigaction *sact, void (*f)(int), int sig, int sig2)
 		return (0);
 	}
 	sact->sa_flags = 0;
+	sact->sa_handler = f;
 	if (!set_sig(sact, sig))
 		return (0);
 	if (!set_sig(sact, sig2))
 		return (0);
-	sact->sa_handler = f;
 	return (1453);
 }
 
@@ -37,7 +37,7 @@ static int	set_sig(struct sigaction *sact, int signal)
 		printf("ERROR: sigaddset ha fallado");
 		return (0);
 	}
-	if (sigaction(SIGUSR1, sact, NULL) == -1)
+	if (sigaction(signal, sact, NULL) == -1)
 	{
 		printf("ERROR: sigaction ha fallado");
 		return (0);
