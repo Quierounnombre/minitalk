@@ -1,21 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.h                                           :+:      :+:    :+:   */
+/*   transform.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vicgarci <vicgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/04 13:07:30 by vicgarci          #+#    #+#             */
-/*   Updated: 2022/11/07 20:10:26 by vicgarci         ###   ########.fr       */
+/*   Created: 2022/11/07 13:51:08 by vicgarci          #+#    #+#             */
+/*   Updated: 2022/11/07 20:13:34 by vicgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SERVER_H
-# define SERVER_H
+#include "client.h"
 
-# include "../libft_def/libftprintf.h"
+static void	send(char c, pid_t pid);
 
-int		set_sigh(struct sigaction *sact, void (*f)(int), int sig, int sig2);
-void	sig_handler(int j);
+void	transform(char *s, pid_t pid)
+{
+	while (*s != '\0')
+	{
+		send(*s, pid);
+		s++;
+	}
+}
 
-#endif
+static void	send(char c, pid_t pid)
+{
+	int	i;
+
+	i = 0;
+	while (i != 7)
+	{
+		if (c & 1)
+			kill(pid, SIGUSR1);
+		else
+			kill(pid, SIGUSR2);
+		c = c >> 1;
+		i++;
+		sleep(1);
+	}
+}
