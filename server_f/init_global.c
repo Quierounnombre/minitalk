@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.c                                           :+:      :+:    :+:   */
+/*   init_global.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vicgarci <vicgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/02 15:51:30 by vicgarci          #+#    #+#             */
-/*   Updated: 2022/11/14 14:31:04 by vicgarci         ###   ########.fr       */
+/*   Created: 2022/11/14 14:30:45 by vicgarci          #+#    #+#             */
+/*   Updated: 2022/11/14 14:31:23 by vicgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "server.h"
 
-int	main(void)
+void	init_global(void)
 {
-	struct sigaction	sact;
-
-	init_global();
-	ft_printf("Mi ID es: %d\n", getpid());
-	if (set_sigh(&sact, SIGUSR1, SIGUSR2))
-	{
-		while (1)
-			pause();
-	}
+	g_client_info.is_malloc_ready = 1810;
+	g_client_info.num_chars = 0;
+	g_client_info.pid_c = 0;
+	g_client_info.malloc_size = 0;
+	g_client_info.s_pos = 0;
 }

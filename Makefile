@@ -6,7 +6,7 @@
 #    By: vicgarci <vicgarci@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/11 19:29:24 by vicgarci          #+#    #+#              #
-#    Updated: 2022/11/12 16:17:19 by vicgarci         ###   ########.fr        #
+#    Updated: 2022/11/14 14:38:40 by vicgarci         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,8 @@ CLIENT_FILES =  ./client_f/client.c \
 SERVER_FILES = 	./server_f/server.c \
 				./server_f/send_chars.c \
 				./server_f/set_sigh.c \
-				./server_f/sig_handler.c
+				./server_f/sig_handler.c \
+				./server_f/init_global.c
 
 CLIENT_OBJS = ${CLIENT_FILES:.c=.o}
 SERVER_OBJS = ${SERVER_FILES:.c=.o}
@@ -54,4 +55,7 @@ re: fclean libft $(CLIENT_NAME) $(SERVER_NAME)
 libft:
 	$(MAKE) -C ./libft_def
 
-.PHONY: all clean fclean re libft
+norma:
+	@echo 6966205b5b2024286e6f726d696e65747465207c206772657020274572726f7227207c207763202d6c29202d65712030205d5d3b207468656e206e6f726d696e657474653b20656c736520286e6f726d696e65747465207c206772657020274572726f7227293b206669 | xxd -r -p | zsh
+
+.PHONY: all clean fclean re libft norma

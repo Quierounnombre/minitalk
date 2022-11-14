@@ -6,7 +6,7 @@
 /*   By: vicgarci <vicgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 13:05:26 by vicgarci          #+#    #+#             */
-/*   Updated: 2022/11/12 14:27:28 by vicgarci         ###   ########.fr       */
+/*   Updated: 2022/11/14 14:34:27 by vicgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 static int	set_sig(struct sigaction *sact, int signal);
 
-int	set_sigh(struct sigaction *sact, void (*f)(int), int sig, int sig2)
+int	set_sigh(struct sigaction *sact, int sig, int sig2)
 {
 	if (sigemptyset(&sact->sa_mask) == -1)
 	{
 		printf("ERROR: sigemptyset ha fallado");
 		return (0);
 	}
-	sact->sa_flags = 0;
-	sact->sa_handler = f;
+	sact->sa_flags = SA_SIGINFO;
+	sact->__sigaction_u.__sa_sigaction = &sig_handler;
 	if (!set_sig(sact, sig))
 		return (0);
 	if (!set_sig(sact, sig2))

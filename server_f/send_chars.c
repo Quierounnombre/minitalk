@@ -6,7 +6,7 @@
 /*   By: vicgarci <vicgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 13:51:08 by vicgarci          #+#    #+#             */
-/*   Updated: 2022/11/10 15:59:58 by vicgarci         ###   ########.fr       */
+/*   Updated: 2022/11/14 14:32:00 by vicgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,7 @@ void	send_chars(int i, pid_t pid)
 		write(1, "\n", 1);
 		free(first_s);
 		send(4, pid);
-		g_client_info.is_pid_ready = 1810;
-		g_client_info.num_chars = 0;
-		g_client_info.pid_c = 0;
+		init_global();
 	}
 	else
 		ft_printf("Ha fallado la reserva de memoria\n");
