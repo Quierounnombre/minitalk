@@ -6,7 +6,7 @@
 /*   By: vicgarci <vicgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 19:16:57 by vicgarci          #+#    #+#             */
-/*   Updated: 2022/11/14 14:45:51 by vicgarci         ###   ########.fr       */
+/*   Updated: 2022/11/14 16:53:44 by vicgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ static void	get_malloc_size(unsigned char *c)
 			ft_printf("Error al almacenar memoria");
 			exit(1);
 		}
+		ft_printf("He reservado memoria por un total de %d bytes \n",
+			g_client_info.malloc_size);
 		ft_printf("\nEl pid del cliente es: %d\n", g_client_info.pid_c);
 	}
 }
