@@ -6,7 +6,7 @@
 #    By: vicgarci <vicgarci@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/11 19:29:24 by vicgarci          #+#    #+#              #
-#    Updated: 2022/11/12 14:24:04 by vicgarci         ###   ########.fr        #
+#    Updated: 2022/11/12 16:17:19 by vicgarci         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CLIENT_NAME = client
 SERVER_NAME = server
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -O3
 RM = rm -f
 
 CLIENT_FILES =  ./client_f/client.c \
@@ -33,10 +33,7 @@ SERVER_FILES = 	./server_f/server.c \
 CLIENT_OBJS = ${CLIENT_FILES:.c=.o}
 SERVER_OBJS = ${SERVER_FILES:.c=.o}
 
-$(MAKE_LIBFT):
-	$(MAKE) -C ./libft_def
-
-all: $(MAKE_LIBFT) $(SERVER_NAME) $(CLIENT_NAME) 
+all: libft $(CLIENT_NAME) $(SERVER_NAME)
 
 $(CLIENT_NAME): $(CLIENT_OBJS)
 	$(CC) $(CFLAGS) $(LIBFT) $(CLIENT_OBJS) -o $(CLIENT_NAME)
@@ -46,11 +43,15 @@ $(SERVER_NAME): $(SERVER_OBJS)
 
 clean:
 	$(RM) $(CLIENT_OBJS) $(SERVER_OBJS)
+	$(MAKE) clean -C ./libft_def
 
 fclean: clean
-	$(RM) $(CLIENT_NAME) $(SERVER_NAME)
+	$(RM) $(CLIENT_NAME) $(SERVER_NAME) $(LIBFT)
 
 
-re: fclean $(MAKE_LIBFT) $(CLIENT_NAME) $(SERVER_NAME)
+re: fclean libft $(CLIENT_NAME) $(SERVER_NAME)
 
-.PHONY: all clean fclean re
+libft:
+	$(MAKE) -C ./libft_def
+
+.PHONY: all clean fclean re libft

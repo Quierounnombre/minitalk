@@ -28,7 +28,7 @@ COLOUR_BLUE=\033[0;34m
 COLOUR_END=\033[0m
 
 CC = gcc
-FLAGS = -c -Wall -Wextra -Werror
+FLAGS = -c -Wall -Wextra -Werror -O3
 INCLUDES = -I libft_def -I .
 
 OBJS = $(SRCS:.c=.o)
