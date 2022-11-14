@@ -6,7 +6,7 @@
 /*   By: vicgarci <vicgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 19:16:57 by vicgarci          #+#    #+#             */
-/*   Updated: 2022/11/14 16:41:17 by vicgarci         ###   ########.fr       */
+/*   Updated: 2022/11/14 20:21:55 by vicgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,13 @@
 
 void	sig_handler(int sig)
 {
-	static unsigned char	c;
-	static int				i;
-	static int				is_first;
+	static size_t	i;
 
-	if (!is_first)
+	if (sig == SIGUSR2)
 	{
-		ft_printf("He enviado: ");
-		is_first = 1914;
+		ft_printf("Nº iteraciones: %d", i);
+		i++;
 	}
 	if (sig == SIGUSR1)
-		c = c << 1 | 1;
-	else if (sig == SIGUSR2)
-		c = c << 1;
-	i++;
-	if (i == 8)
-	{
-		if (c == 4)
-			exit(1);
-		ft_printf("%c", c);
-		i = 0;
-		c = 0;
-	}
+		exit(1);
 }

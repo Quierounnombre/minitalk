@@ -6,7 +6,7 @@
 /*   By: vicgarci <vicgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 13:15:54 by vicgarci          #+#    #+#             */
-/*   Updated: 2022/11/14 16:39:49 by vicgarci         ###   ########.fr       */
+/*   Updated: 2022/11/14 20:12:25 by vicgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	main(int argc, char **argv)
 			ft_printf("Escribo a: %d\n", pid);
 			len = ft_strlen(argv[2]);
 			ft_printf("La cadena mide %d caracteres\n", len);
-			transform(argv[2], pid, len);
+			transform(argv[2], pid);
 			while (1)
 				pause();
 		}

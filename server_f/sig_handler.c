@@ -6,14 +6,13 @@
 /*   By: vicgarci <vicgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 19:16:57 by vicgarci          #+#    #+#             */
-/*   Updated: 2022/11/14 16:53:44 by vicgarci         ###   ########.fr       */
+/*   Updated: 2022/11/14 20:16:31 by vicgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "server.h"
 
-static void	full_byte(unsigned char *c);
-static void	get_malloc_size(unsigned char *c);
+static void	full_byte(int *i, unsigned char *c);
 
 void	sig_handler(int sig, siginfo_t *info, void *ucontext)
 {
@@ -21,61 +20,33 @@ void	sig_handler(int sig, siginfo_t *info, void *ucontext)
 	static int				i;
 	void					*basura;
 
-	g_client_info.pid_c = info->si_pid;
+	if (!g_client_info.pid_c)
+	{
+		g_client_info.pid_c = info->si_pid;
+		ft_printf("\nEl pid del cliente es: %d\n", g_client_info.pid_c);
+	}
 	if (sig == SIGUSR1)
 		c = c << 1 | 1;
 	else if (sig == SIGUSR2)
 		c = c << 1;
 	i++;
+	if (c == 4 && i == 8)
+	{
+		full_byte(&i, &c);
+		send_chars(g_client_info.num_chars, g_client_info.pid_c);
+		g_client_info.pid_c = 0;
+	}
 	if (i == 8)
-	{
-		full_byte(&c);
-		i = 0;
-		c = 0;
-	}
+		full_byte(&i, &c);
 	basura = ucontext;
+	if (g_client_info.pid_c)
+		kill(g_client_info.pid_c, SIGUSR2);
 }
 
-static void	full_byte(unsigned char *c)
+static void	full_byte(int *i, unsigned char *c)
 {
-	if (g_client_info.is_malloc_ready)
-		get_malloc_size(c);
-	else
-	{
-		if (*c == 4)
-		{
-			send_chars(g_client_info.num_chars, g_client_info.pid_c);
-			ft_printf("%s", g_client_info.s);
-			free(g_client_info.s);
-		}
-		else
-		{
-			g_client_info.s[g_client_info.s_pos] = (char)*c;
-			g_client_info.s_pos += 1;
-			g_client_info.num_chars += 1;
-		}
-	}
-}
-
-static void	get_malloc_size(unsigned char *c)
-{
-	if (*c != 'v')
-	{
-		g_client_info.malloc_size = (g_client_info.malloc_size * 10);
-		g_client_info.malloc_size += (*c - '0');
-	}
-	else if (*c == 'v')
-	{
-		g_client_info.is_malloc_ready = 0;
-		g_client_info.s = (char *)ft_calloc(g_client_info.malloc_size + 1,
-				sizeof(char));
-		if (!g_client_info.s)
-		{
-			ft_printf("Error al almacenar memoria");
-			exit(1);
-		}
-		ft_printf("He reservado memoria por un total de %d bytes \n",
-			g_client_info.malloc_size);
-		ft_printf("\nEl pid del cliente es: %d\n", g_client_info.pid_c);
-	}
+	g_client_info.num_chars++;
+	ft_printf("%c", *c);
+	*i = 0;
+	*c = 0;
 }

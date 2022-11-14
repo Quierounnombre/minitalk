@@ -6,7 +6,7 @@
 /*   By: vicgarci <vicgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 13:51:08 by vicgarci          #+#    #+#             */
-/*   Updated: 2022/11/14 16:53:12 by vicgarci         ###   ########.fr       */
+/*   Updated: 2022/11/14 20:35:37 by vicgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,15 @@
 
 static void	send(char c, pid_t pid);
 
-void	transform(char *s, pid_t pid, int len)
+void	transform(char *s, pid_t pid)
 {
-	char	*len_s;
-	char	*start_len_s;
-
 	ft_printf("Mi pid es: %d\n", getpid());
-	len_s = ft_itoa(len);
-	if (len_s)
+	while (*s != '\0')
 	{
-		start_len_s = len_s;
-		while (*len_s != '\0')
-			send(*(len_s++), pid);
-		free(start_len_s);
-		send('v', pid);
-		while (*s != '\0')
-		{
-			send(*s, pid);
-			s++;
-		}
-		send(4, pid);
+		send(*s, pid);
+		s++;
 	}
-	else
-	{
-		ft_printf("Ha fallado la reserva de memoria");
-		exit(1);
-	}
+	send(4, pid);
 }
 
 static void	send(char c, pid_t pid)
