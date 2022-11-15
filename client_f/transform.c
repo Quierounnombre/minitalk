@@ -6,7 +6,7 @@
 /*   By: vicgarci <vicgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 13:51:08 by vicgarci          #+#    #+#             */
-/*   Updated: 2022/11/14 20:35:37 by vicgarci         ###   ########.fr       */
+/*   Updated: 2022/11/15 18:20:32 by vicgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	send(char c, pid_t pid);
 
 void	transform(char *s, pid_t pid)
 {
-	ft_printf("Mi pid es: %d\n", getpid());
+	ft_printf("Mi pid es: %d\n\n", getpid());
 	while (*s != '\0')
 	{
 		send(*s, pid);

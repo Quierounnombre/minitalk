@@ -6,7 +6,7 @@
 /*   By: vicgarci <vicgarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 19:16:57 by vicgarci          #+#    #+#             */
-/*   Updated: 2022/11/14 20:16:31 by vicgarci         ###   ########.fr       */
+/*   Updated: 2022/11/15 18:19:19 by vicgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	sig_handler(int sig, siginfo_t *info, void *ucontext)
 	{
 		full_byte(&i, &c);
 		send_chars(g_client_info.num_chars, g_client_info.pid_c);
-		g_client_info.pid_c = 0;
 	}
 	if (i == 8)
 		full_byte(&i, &c);
